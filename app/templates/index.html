@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webhook sender</title>
+</head>
+<body>
+    <h1>{{greeting}}</h1>
+
+{% if result is defined %}
+    <p>Status code: {{ result.status_code }}</p>
+    <p>Content: {{ result.content.decode("utf-8") }}</p>
+{% endif %}
+
+    <form method="post">
+        <label>Target</label>
+        <br>
+        <input type="text" size="100" name="target" value="{{ request.form['target'] }}"></input>
+        <br>
+        <label>Method</label>
+        <br>
+        <select size="3" name="method" value="{{ request.form['method'] }}">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+        </select>
+        <br>
+        <label>Webhook content</label>
+        <br>
+        <textarea name="content" rows="15" cols="60">{{ request.form['content'] }}</textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="/env">Secret admin area</a>
+</body>
+</html>
